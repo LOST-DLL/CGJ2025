@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.Animations;
 
 public class PlayerControllerBase : MonoBehaviour
-{
+{   
     public float speed = 5;
-    new private Rigidbody2D rigidbody;
+    new private Rigidbody rigidbody;
     private Animator animator;
     private float inputX, inputY;
 
@@ -18,7 +18,7 @@ public class PlayerControllerBase : MonoBehaviour
 
     protected void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
 
