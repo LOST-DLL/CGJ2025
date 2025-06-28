@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 798977543584364062, guid: c53e5531fed69f343b4725482b3eda3a, type: 3}
       propertyPath: m_Name
-      value: Character
+      value: Potato
       objectReference: {fileID: 0}
     - target: {fileID: 1588923994726038874, guid: c53e5531fed69f343b4725482b3eda3a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1588923994726038874, guid: c53e5531fed69f343b4725482b3eda3a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1588923994726038874, guid: c53e5531fed69f343b4725482b3eda3a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1588923994726038874, guid: c53e5531fed69f343b4725482b3eda3a, type: 3}
       propertyPath: m_LocalRotation.y
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1588923994726038874, guid: c53e5531fed69f343b4725482b3eda3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1588923994726038874, guid: c53e5531fed69f343b4725482b3eda3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
