@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 2019658729}
   - component: {fileID: 2019658731}
   m_Layer: 0
-  m_Name: "AI\u80CC\u666F"
+  m_Name: HotPot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

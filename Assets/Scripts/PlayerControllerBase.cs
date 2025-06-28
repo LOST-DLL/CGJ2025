@@ -11,10 +11,10 @@ public class PlayerControllerBase : MonoBehaviour
 {   
     private float inputX, inputY;
 
+    public string Character;
+
     protected string horizontalAxis;
     protected string verticalAxis;
-
-    private float stopX, stopY;
 
     public bool isFlipped => inputX < 0;
 
@@ -25,7 +25,7 @@ public class PlayerControllerBase : MonoBehaviour
     protected void Start()
     {
         
-        this.loadCharacter("Character");
+        this.loadCharacter(Character);
     }
     
     protected void Update()

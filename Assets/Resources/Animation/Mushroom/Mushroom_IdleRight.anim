@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mushroom_Idle
+  m_Name: Mushroom_IdleRight
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: fc967d623b028e341a9a0d3555c40e14, type: 3}
+      value: {fileID: 21300000, guid: 25f1bca3b6082b5499b8cfc363df4699, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 44d2a1aeb3411274e9ae754981efb9e2, type: 3}
+      value: {fileID: 21300000, guid: 85fdb436c2475a64585d82b3cfe266b9, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: be0fa688f77249648891a80afd1adf8c, type: 3}
+      value: {fileID: 21300000, guid: 08731f42bec5fc74a961248047c190ba, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: 1c12fe1c0ed9a5b4bb3861a28b63eaf1, type: 3}
+      value: {fileID: 21300000, guid: 87931e639d81f7a4ca363ebac2d784b1, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: fc967d623b028e341a9a0d3555c40e14, type: 3}
-    - {fileID: 21300000, guid: 44d2a1aeb3411274e9ae754981efb9e2, type: 3}
-    - {fileID: 21300000, guid: be0fa688f77249648891a80afd1adf8c, type: 3}
-    - {fileID: 21300000, guid: 1c12fe1c0ed9a5b4bb3861a28b63eaf1, type: 3}
+    - {fileID: 21300000, guid: 25f1bca3b6082b5499b8cfc363df4699, type: 3}
+    - {fileID: 21300000, guid: 85fdb436c2475a64585d82b3cfe266b9, type: 3}
+    - {fileID: 21300000, guid: 08731f42bec5fc74a961248047c190ba, type: 3}
+    - {fileID: 21300000, guid: 87931e639d81f7a4ca363ebac2d784b1, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
