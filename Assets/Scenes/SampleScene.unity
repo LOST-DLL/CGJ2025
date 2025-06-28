@@ -713,6 +713,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2155583396379522174, guid: b495df2efcc9a044fa017d3b83c2d321, type: 3}
+      propertyPath: dashKey
+      value: 258
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155583396379522174, guid: b495df2efcc9a044fa017d3b83c2d321, type: 3}
+      propertyPath: characterName
+      value: Fish
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155583396379522174, guid: b495df2efcc9a044fa017d3b83c2d321, type: 3}
+      propertyPath: enablePlayerInput
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5432075457146502539, guid: b495df2efcc9a044fa017d3b83c2d321, type: 3}
       propertyPath: m_Name
       value: Player2
@@ -954,6 +966,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 119010993739381741, guid: 598a44c3d1d3050438fd6685cf6fa0d9, type: 3}
+      propertyPath: dashKey
+      value: 121
+      objectReference: {fileID: 0}
+    - target: {fileID: 119010993739381741, guid: 598a44c3d1d3050438fd6685cf6fa0d9, type: 3}
+      propertyPath: characterName
+      value: Potato
+      objectReference: {fileID: 0}
+    - target: {fileID: 119010993739381741, guid: 598a44c3d1d3050438fd6685cf6fa0d9, type: 3}
+      propertyPath: enablePlayerInput
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2800341718864739889, guid: 598a44c3d1d3050438fd6685cf6fa0d9, type: 3}
       propertyPath: m_Name
       value: Player1

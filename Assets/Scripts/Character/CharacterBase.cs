@@ -15,10 +15,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField,Range(0,10)] private float weight = 1;//用于计算击退距离，重量越大越不易被击退
     [SerializeField] private float hitBackSpeed = 20;
     [SerializeField] private float maxHitTime = 10;//最大的击退时间
-    
-    
-    public Rigidbody2D rigidbody = new Rigidbody2D();
-    private Collider2D collider = new Collider2D();
+
+
+    public Rigidbody2D rigidbody;
+    private Collider2D collider;
     public Animator animator;
     private GameObject anim = null;
 

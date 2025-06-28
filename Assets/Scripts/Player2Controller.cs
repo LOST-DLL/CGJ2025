@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Player2Controller : PlayerControllerBase
 {
+    private void Awake() {
+        horizontalAxis = "Player2Horizontal";
+        verticalAxis = "Player2Vertical";
+    }
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
-        horizontalAxis = "Player2Horizontal";
-        verticalAxis = "Player2Vertical";
     }
 
     // Update is called once per frame
