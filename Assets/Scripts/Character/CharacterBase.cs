@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float moveSpeed = 10;
+    [SerializeField] private float attackPower = 10;
+    [SerializeField] private float maxHp = 100;
+    [SerializeField] private float weight = 10;//用于计算击退距离，重量越大越不易被击退
+    
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
