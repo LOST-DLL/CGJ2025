@@ -15,6 +15,7 @@ public class PlayerControllerBase : MonoBehaviour
     protected string horizontalAxis;
     protected string verticalAxis;
 
+    public string characterName;
     public bool isFlipped => inputX < 0;
 
     public bool enablePlayerInput = false;
@@ -23,7 +24,7 @@ public class PlayerControllerBase : MonoBehaviour
 
     protected void Start()
     {
-        this.loadCharacter("Character");
+        this.loadCharacter(characterName);
     }
     
     protected void Update()
