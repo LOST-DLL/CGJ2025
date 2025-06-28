@@ -8,6 +8,7 @@ public class Player1Controller : PlayerControllerBase
     private void Awake() {
         horizontalAxis = "Player1Horizontal";
         verticalAxis = "Player1Vertical";
+        originFaceDir = 1f;
     }
     void Start()
     {

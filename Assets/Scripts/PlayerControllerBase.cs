@@ -12,13 +12,13 @@ public class PlayerControllerBase : MonoBehaviour
 {   
     private float inputX, inputY;
 
+    protected float originFaceDir;
     protected string horizontalAxis;
     protected string verticalAxis;
 
     public KeyCode dashKey;
 
     public string characterName;
-    public bool isFlipped => inputX < 0;
 
     public bool enablePlayerInput = false;
 
@@ -65,6 +65,6 @@ public class PlayerControllerBase : MonoBehaviour
     {
         this.enablePlayerInput = true;
         this.selectedCharacter = character;
-        this.selectedCharacter.Init();
+        this.selectedCharacter.Init(originFaceDir);
     }
 }

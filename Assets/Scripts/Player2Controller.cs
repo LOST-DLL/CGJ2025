@@ -7,6 +7,7 @@ public class Player2Controller : PlayerControllerBase
     private void Awake() {
         horizontalAxis = "Player2Horizontal";
         verticalAxis = "Player2Vertical";
+        originFaceDir = -1f;
     }
     // Start is called before the first frame update
     void Start()
