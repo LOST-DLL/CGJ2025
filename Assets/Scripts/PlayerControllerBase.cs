@@ -15,8 +15,6 @@ public class PlayerControllerBase : MonoBehaviour
     protected string horizontalAxis;
     protected string verticalAxis;
 
-    private float stopX, stopY;
-
     public bool isFlipped => inputX < 0;
 
     public bool enablePlayerInput = false;
