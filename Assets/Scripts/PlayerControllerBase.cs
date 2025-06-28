@@ -26,7 +26,7 @@ public class PlayerControllerBase : MonoBehaviour
 
     protected void Start()
     {
-        this.loadCharacter(characterName);
+        this.LoadCharacter(characterName);
     }
     
     protected void Update()
@@ -38,14 +38,14 @@ public class PlayerControllerBase : MonoBehaviour
         }
         if (this.selectedCharacter)
         {
-            this.selectedCharacter.doMove(inputX, inputY);
+            this.selectedCharacter.Move(inputX, inputY);
             if (Input.GetKey(dashKey)) {
-                this.selectedCharacter.useDash();
+                this.selectedCharacter.Dash();
             }
         }
     }
 
-    void loadCharacter(string name)
+    void LoadCharacter(string name)
     {
         GameObject prefab = Resources.Load<GameObject>("Prefabs/Character/" + name);
 
@@ -53,7 +53,7 @@ public class PlayerControllerBase : MonoBehaviour
         {
             var go = Instantiate(prefab, transform.position, Quaternion.identity);
             go.transform.SetParent(this.transform);
-            this.setSelectedCharacter(go.GetComponent<CharacterBase>());
+            this.SetSelectedCharacter(go.GetComponent<CharacterBase>());
         }
         else
         {
@@ -61,7 +61,7 @@ public class PlayerControllerBase : MonoBehaviour
         }
     }
 
-    void setSelectedCharacter(CharacterBase character)
+    void SetSelectedCharacter(CharacterBase character)
     {
         this.enablePlayerInput = true;
         this.selectedCharacter = character;
