@@ -2,15 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.Animations;
 
 public class PlayerControllerBase : MonoBehaviour
 {   
-    public float speed = 5;
-    new private Rigidbody2D rigidbody;
-    private Animator animator;
     private float inputX, inputY;
 
     protected string horizontalAxis;
@@ -20,48 +18,45 @@ public class PlayerControllerBase : MonoBehaviour
 
     public bool isFlipped => inputX < 0;
 
+    public bool isMoving = true;
+
+    private CharacterBase selectedCharacter = null;
+
     protected void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        
+        this.loadCharacter("Character");
     }
-
-    // Update is called once per frame
+    
     protected void Update()
     {
         inputX = Input.GetAxisRaw(horizontalAxis);
         inputY = Input.GetAxisRaw(verticalAxis);
-        Vector2 input = new Vector2(inputX, inputY).normalized;
-        this.Flip();
-        rigidbody.velocity = input * speed;
-        //if (input != Vector2.zero) {
-        //    animator.SetBool("isMoving", false);
-        //    stopX = input.x;
-        //    stopY = input.y;
-        //}
-        //else {
-        //    animator.SetBool("isMoving", true);
-        //}
-        //animator.SetFloat("X", stopX);
-        //animator.SetFloat("Y", stopY);
-
+        if (this.isMoving&&this.selectedCharacter)
+        {
+            this.selectedCharacter.doMove(inputX, inputY);
+        }
     }
 
-    void Flip()
+    void loadCharacter(string name)
     {
-        if (inputX <= 0.01f&&inputX>=-0.01f) return;
-        if (inputX > 0)
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + name);
+
+        if (prefab != null)
         {
-            transform.localScale = new Vector3(math.abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            var go = Instantiate(prefab, transform.position, Quaternion.identity);
+            go.transform.SetParent(this.transform);
+            this.setSelectedCharacter(go.GetComponent<CharacterBase>());
         }
         else
         {
-            transform.localScale = new Vector3(-math.abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            Debug.LogError("预制体不存在: " + name);
         }
     }
-    
-    void doAttack()
+
+    void setSelectedCharacter(CharacterBase character)
     {
-        
+        this.selectedCharacter = character;
+        this.selectedCharacter.Init();
     }
 }
