@@ -113,7 +113,7 @@ MonoBehaviour:
   attackPower: 10.09
   maxHp: 100
   curHp: 100
-  dashSpeed: 40
+  dashSpeed: 20
   dashTime: 0.075
   dashDamage: 5
   knockbackForce: 10

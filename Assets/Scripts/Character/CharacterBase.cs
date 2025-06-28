@@ -17,7 +17,7 @@ public class CharacterBase : MonoBehaviour {
 
     [Header("Dash Settings")]
     [SerializeField] private float dashSpeed = 40;
-    private float dashCD = 0.5f;
+    private float dashCD = 0.25f;
     [SerializeField] private float dashTime = 0.25f;
     [SerializeField] private float dashDamage = 5;
     private float dashTimer = 0;

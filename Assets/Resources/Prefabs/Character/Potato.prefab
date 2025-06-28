@@ -66,7 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6919048072555277909, guid: c53e5531fed69f343b4725482b3eda3a, type: 3}
       propertyPath: dashSpeed
-      value: 75
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6919048072555277909, guid: c53e5531fed69f343b4725482b3eda3a, type: 3}
+      propertyPath: dashDamage
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
