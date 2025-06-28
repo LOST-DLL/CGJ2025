@@ -1,14 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.Animations;
 
 public class PlayerControllerBase : MonoBehaviour
 {   
-    public float speed = 5;
-    new private Rigidbody2D rigidbody;
-    private Animator animator;
     private float inputX, inputY;
 
     protected string horizontalAxis;
@@ -16,29 +16,47 @@ public class PlayerControllerBase : MonoBehaviour
 
     private float stopX, stopY;
 
+    public bool isFlipped => inputX < 0;
+
+    public bool isMoving = true;
+
+    private CharacterBase selectedCharacter = null;
+
     protected void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        
+        this.loadCharacter("Character");
     }
-
-    // Update is called once per frame
+    
     protected void Update()
     {
         inputX = Input.GetAxisRaw(horizontalAxis);
         inputY = Input.GetAxisRaw(verticalAxis);
-        Vector2 input = new Vector2(inputX, inputY).normalized;
-        rigidbody.velocity = input * speed;
-        //if (input != Vector2.zero) {
-        //    animator.SetBool("isMoving", false);
-        //    stopX = input.x;
-        //    stopY = input.y;
-        //}
-        //else {
-        //    animator.SetBool("isMoving", true);
-        //}
-        //animator.SetFloat("X", stopX);
-        //animator.SetFloat("Y", stopY);
+        if (this.isMoving&&this.selectedCharacter)
+        {
+            this.selectedCharacter.doMove(inputX, inputY);
+        }
+    }
 
+    void loadCharacter(string name)
+    {
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/Character/" + name);
+
+        if (prefab != null)
+        {
+            var go = Instantiate(prefab, transform.position, Quaternion.identity);
+            go.transform.SetParent(this.transform);
+            this.setSelectedCharacter(go.GetComponent<CharacterBase>());
+        }
+        else
+        {
+            Debug.LogError("预制体不存在: " + name);
+        }
+    }
+
+    void setSelectedCharacter(CharacterBase character)
+    {
+        this.selectedCharacter = character;
+        this.selectedCharacter.Init();
     }
 }
