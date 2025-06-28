@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Potato_WalkLeft
+  m_Name: Fish_WalkLeft
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: e2fe0d44f15b8c1489423dc355488972, type: 3}
+      value: {fileID: 21300000, guid: 11d382efcaa58fe40b9ba2e4e2dd6c3c, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 9fe6e27d981e4ee4e9676b0415a60079, type: 3}
+      value: {fileID: 21300000, guid: c815a1d6bfa4bf44b940898de10ba7c9, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: d9572cf61d7c06a4f8e43eed3f3a06f2, type: 3}
+      value: {fileID: 21300000, guid: eb0e687c1f3cae7429cdaa09604304ab, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: 6ba8af91d57510349ac8120df46e5575, type: 3}
+      value: {fileID: 21300000, guid: 5fdada69f378db14fbf53f0421f04610, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: e2fe0d44f15b8c1489423dc355488972, type: 3}
-    - {fileID: 21300000, guid: 9fe6e27d981e4ee4e9676b0415a60079, type: 3}
-    - {fileID: 21300000, guid: d9572cf61d7c06a4f8e43eed3f3a06f2, type: 3}
-    - {fileID: 21300000, guid: 6ba8af91d57510349ac8120df46e5575, type: 3}
+    - {fileID: 21300000, guid: 11d382efcaa58fe40b9ba2e4e2dd6c3c, type: 3}
+    - {fileID: 21300000, guid: c815a1d6bfa4bf44b940898de10ba7c9, type: 3}
+    - {fileID: 21300000, guid: eb0e687c1f3cae7429cdaa09604304ab, type: 3}
+    - {fileID: 21300000, guid: 5fdada69f378db14fbf53f0421f04610, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
