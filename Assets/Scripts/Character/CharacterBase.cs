@@ -17,7 +17,7 @@ public class CharacterBase : MonoBehaviour {
 
     [Header("Dash Settings")]
     [SerializeField] private float dashSpeed = 40;
-    private float dashCD = 0.25f;
+    private float dashCD = 0.5f;
     [SerializeField] private float dashTime = 0.25f;
     [SerializeField] private float dashDamage = 5;
     private float dashTimer = 0;
@@ -26,8 +26,8 @@ public class CharacterBase : MonoBehaviour {
     protected bool isDash = false;
 
     [Header("Knockback Settings")]
-    [SerializeField] private float knockbackForce = 50;
-    [SerializeField] private float backTime = 1f;
+    private float knockbackForce = 10;
+    private float backTime = 0.2f;
     private float backTimer = 0;
     private Vector2 backDirection;
     protected bool isBack = false;
@@ -39,7 +39,10 @@ public class CharacterBase : MonoBehaviour {
     private GameObject anim = null;
 
     private float stopX;
-    public bool isDead = false;
+
+    private bool isDying = false;
+    private float dieFallSpeed = 20;
+
 
     private void FixedUpdate() {
         if (dashTimer > 0) dashTimer -= Time.fixedDeltaTime;
@@ -65,6 +68,14 @@ public class CharacterBase : MonoBehaviour {
                 isBack = false;
                 rigidbody.velocity = Vector2.zero;
             }
+        }
+    }
+
+    private void Update() {
+        if (isDying) {
+            var pos = transform.position;
+            pos.z += dieFallSpeed * Time.deltaTime;
+            transform.position = pos;
         }
     }
 
@@ -121,6 +132,9 @@ public class CharacterBase : MonoBehaviour {
 
     private void OnTakeDamage(float damage, Vector2 direction) {
         curHp -= damage;
+        if (curHp <= 0) {
+            Die();
+        }
         print($"{gameObject.name} curHp = {curHp}");
 
         // 打断 Dash
@@ -131,6 +145,14 @@ public class CharacterBase : MonoBehaviour {
         backDirection = direction.normalized;
         backTimer = backTime;
         isBack = true;
+    }
+
+    public void Die() {
+        isDying = true;
+
+        // 也可以关掉碰撞和刚体
+        if (collider != null) collider.enabled = false;
+        if (rigidbody != null) rigidbody.simulated = false;
     }
 
     private void OnDestroy() {

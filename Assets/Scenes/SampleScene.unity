@@ -764,7 +764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2155583396379522174, guid: b495df2efcc9a044fa017d3b83c2d321, type: 3}
       propertyPath: characterName
-      value: Fish
+      value: MushRoom
       objectReference: {fileID: 0}
     - target: {fileID: 2155583396379522174, guid: b495df2efcc9a044fa017d3b83c2d321, type: 3}
       propertyPath: enablePlayerInput
