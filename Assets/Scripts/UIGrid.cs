@@ -115,7 +115,7 @@ public class UIGrid : MonoBehaviour
     }
     void LoadNextScene()
     {
-        string nextSceneName = "Main";  
+        string nextSceneName = "SampleScene";  
         SceneManager.LoadScene(nextSceneName);
     }
 }
