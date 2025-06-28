@@ -115,6 +115,8 @@ public class UIGrid : MonoBehaviour
     }
     void LoadNextScene()
     {
+        PlayerPrefs.SetInt("Player1Index", player1Index);
+        PlayerPrefs.SetInt("Player2Index", player2Index);
         string nextSceneName = "SampleScene";  
         SceneManager.LoadScene(nextSceneName);
     }
