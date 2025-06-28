@@ -4,7 +4,7 @@ using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.Animations;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerBase : MonoBehaviour
 {
     public float speed = 5;
     new private Rigidbody2D rigidbody;
