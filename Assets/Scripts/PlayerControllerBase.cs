@@ -40,7 +40,7 @@ public class PlayerControllerBase : MonoBehaviour
 
     void loadCharacter(string name)
     {
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + name);
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/Character/" + name);
 
         if (prefab != null)
         {
