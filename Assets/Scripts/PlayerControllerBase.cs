@@ -29,7 +29,6 @@ public class PlayerControllerBase : MonoBehaviour
         inputY = Input.GetAxisRaw(verticalAxis);
         Vector2 input = new Vector2(inputX, inputY).normalized;
         rigidbody.velocity = input * speed;
-
         //if (input != Vector2.zero) {
         //    animator.SetBool("isMoving", false);
         //    stopX = input.x;
@@ -40,5 +39,6 @@ public class PlayerControllerBase : MonoBehaviour
         //}
         //animator.SetFloat("X", stopX);
         //animator.SetFloat("Y", stopY);
+
     }
 }
