@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 
 public class PlayerControllerBase : MonoBehaviour
-{
+{   
     public float speed = 5;
     new private Rigidbody rigidbody;
     private Animator animator;
