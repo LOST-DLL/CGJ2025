@@ -43,12 +43,11 @@ public class CharacterBase : MonoBehaviour
             animator.SetBool("isMoving", true);
             stopX = inputX;
             stopY = inputY;
+            if(stopX != 0) animator.SetFloat("X", stopX);
         }
         else {
             animator.SetBool("isMoving", false);
         }
-        animator.SetFloat("InputX", stopX);
-        animator.SetFloat("InputY", stopY);
     }
 
 }
