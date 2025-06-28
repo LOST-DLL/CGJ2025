@@ -4,8 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void DamageDelegate(float damage, Vector2 direction);
-
 public class CharacterBase : MonoBehaviour {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 10;
@@ -13,7 +11,8 @@ public class CharacterBase : MonoBehaviour {
     [SerializeField] private float maxHp = 100;
     public float curHp = 100;
 
-    public event DamageDelegate TakeDamageEvent;
+    public event Action<float> TakeDamageEvent;
+    public event Action<Vector2> KnockbackEvent;
 
     [Header("Dash Settings")]
     [SerializeField] private float dashSpeed = 40;
@@ -26,7 +25,7 @@ public class CharacterBase : MonoBehaviour {
     protected bool isDash = false;
 
     [Header("Knockback Settings")]
-    private float knockbackForce = 10;
+    private float knockbackForce = 10f;
     private float backTime = 0.2f;
     private float backTimer = 0;
     private Vector2 backDirection;
@@ -43,14 +42,12 @@ public class CharacterBase : MonoBehaviour {
     private bool isDying = false;
     private float dieFallSpeed = 20;
 
-
+    private float originFaceDir;
     private void FixedUpdate() {
         if (dashTimer > 0) dashTimer -= Time.fixedDeltaTime;
 
         if (isDash) {
             outDashTimer -= Time.fixedDeltaTime;
-
-            // 平滑推进 dash
             rigidbody.velocity = dashDirection * dashSpeed;
 
             if (outDashTimer <= 0) {
@@ -60,8 +57,6 @@ public class CharacterBase : MonoBehaviour {
         }
         else if (isBack) {
             backTimer -= Time.fixedDeltaTime;
-
-            // 平滑推进 knockback
             rigidbody.velocity = backDirection * knockbackForce;
 
             if (backTimer <= 0) {
@@ -81,16 +76,26 @@ public class CharacterBase : MonoBehaviour {
 
     public void Init(float originFaceDir) {
         this.stopX = originFaceDir;
+        this.originFaceDir = originFaceDir;
         animator.SetFloat("X", stopX);
         rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
         collider = this.gameObject.GetComponent<Collider2D>();
         this.curHp = this.maxHp;
         this.anim = transform.Find("anim").gameObject;
+
+        // 注册事件
         TakeDamageEvent += OnTakeDamage;
+        if (originFaceDir > 0) {
+            TakeDamageEvent += HealthSystem.Instance.TakeDamage;
+        }
+        else {
+            TakeDamageEvent += HealthSystem.Instance.UseMana;
+        }
+        KnockbackEvent += OnKnockback;
     }
 
     public void Move(float inputX, float inputY) {
-        if (isDash || isBack) return;  // 在Dash或击退时不能自己动
+        if (isDash || isBack) return;
 
         Vector2 input = new Vector2(inputX, inputY).normalized;
         rigidbody.velocity = input * moveSpeed;
@@ -122,7 +127,10 @@ public class CharacterBase : MonoBehaviour {
             if (otherObject.CompareTag("Player")) {
                 var otherCharacter = otherObject.GetComponent<CharacterBase>();
                 if (otherCharacter != null) {
-                    otherCharacter.TakeDamageEvent?.Invoke(dashDamage, dashDirection);
+                    // 分别调用两个事件
+                    otherCharacter.TakeDamageEvent?.Invoke(dashDamage);
+                    otherCharacter.KnockbackEvent?.Invoke(dashDirection);
+
                     this.isDash = false;
                     rigidbody.velocity = Vector2.zero;
                 }
@@ -130,7 +138,7 @@ public class CharacterBase : MonoBehaviour {
         }
     }
 
-    private void OnTakeDamage(float damage, Vector2 direction) {
+    private void OnTakeDamage(float damage) {
         curHp -= damage;
         if (curHp <= 0) {
             Die();
@@ -140,8 +148,14 @@ public class CharacterBase : MonoBehaviour {
         // 打断 Dash
         isDash = false;
         outDashTimer = 0;
+    }
 
-        // 击退设置
+    private void OnKnockback(Vector2 direction) {
+        // 打断 Dash
+        isDash = false;
+        outDashTimer = 0;
+
+        // 设置击退
         backDirection = direction.normalized;
         backTimer = backTime;
         isBack = true;
@@ -150,12 +164,18 @@ public class CharacterBase : MonoBehaviour {
     public void Die() {
         isDying = true;
 
-        // 也可以关掉碰撞和刚体
         if (collider != null) collider.enabled = false;
         if (rigidbody != null) rigidbody.simulated = false;
     }
 
     private void OnDestroy() {
         TakeDamageEvent -= OnTakeDamage;
+        KnockbackEvent -= OnKnockback;
+        if (originFaceDir > 0) {
+            TakeDamageEvent -= HealthSystem.Instance.TakeDamage;
+        }
+        else {
+            TakeDamageEvent -= HealthSystem.Instance.UseMana;
+        }
     }
 }

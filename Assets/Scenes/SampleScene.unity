@@ -945,11 +945,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7794881765234026120, guid: eda7c67a33338f84f88dbd9ac7fccee2, type: 3}
       propertyPath: hitPoint
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7794881765234026120, guid: eda7c67a33338f84f88dbd9ac7fccee2, type: 3}
       propertyPath: manaPoint
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7794881765234026120, guid: eda7c67a33338f84f88dbd9ac7fccee2, type: 3}
       propertyPath: Regenerate
@@ -957,11 +957,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7794881765234026120, guid: eda7c67a33338f84f88dbd9ac7fccee2, type: 3}
       propertyPath: maxHitPoint
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7794881765234026120, guid: eda7c67a33338f84f88dbd9ac7fccee2, type: 3}
       propertyPath: maxManaPoint
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7794881765234026120, guid: eda7c67a33338f84f88dbd9ac7fccee2, type: 3}
       propertyPath: currentManaBar
