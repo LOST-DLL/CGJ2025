@@ -7,7 +7,7 @@ using UnityEngine.Animations;
 public class PlayerControllerBase : MonoBehaviour
 {   
     public float speed = 5;
-    new private Rigidbody rigidbody;
+    new private Rigidbody2D rigidbody;
     private Animator animator;
     private float inputX, inputY;
 
@@ -18,7 +18,7 @@ public class PlayerControllerBase : MonoBehaviour
 
     protected void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
