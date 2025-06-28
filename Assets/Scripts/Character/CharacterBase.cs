@@ -13,7 +13,7 @@ public class CharacterBase : MonoBehaviour
     
     private float moveX, moveY;
     private Rigidbody2D rigidbody = new Rigidbody2D();
-    private Animator animator = new Animator();
+    public Animator animator;
 
     private void Awake()
     {
@@ -28,7 +28,6 @@ public class CharacterBase : MonoBehaviour
     public void Init()
     {
         rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
-        animator = this.gameObject.GetComponent<Animator>();
     }
 
     public void doMove(float inputX,float inputY)
