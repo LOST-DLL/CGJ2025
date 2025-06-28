@@ -15,6 +15,8 @@ public class PlayerControllerBase : MonoBehaviour
     protected string horizontalAxis;
     protected string verticalAxis;
 
+    public KeyCode dashKey;
+
     public string characterName;
     public bool isFlipped => inputX < 0;
 
@@ -37,6 +39,9 @@ public class PlayerControllerBase : MonoBehaviour
         if (this.selectedCharacter)
         {
             this.selectedCharacter.doMove(inputX, inputY);
+            if (Input.GetKey(dashKey)) {
+                this.selectedCharacter.useDash();
+            }
         }
     }
 

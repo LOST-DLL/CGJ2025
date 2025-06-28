@@ -18,7 +18,7 @@ public class CharacterBase : MonoBehaviour
     
     
     public Rigidbody2D rigidbody = new Rigidbody2D();
-    private Collider collider = new Collider();
+    private Collider2D collider = new Collider2D();
     public Animator animator;
     private GameObject anim = null;
 
@@ -32,6 +32,17 @@ public class CharacterBase : MonoBehaviour
     private float hp = 0;
     public Vector3 moveVec = new Vector3();
     public Vector3 lastMoveVec = new Vector3();
+
+    [Header("---- Skill ----")]
+    [SerializeField] protected float skillTime = 10;
+
+    [SerializeField] protected float dashSpeed = 50;
+
+    [SerializeField] protected float dashDamageRadius = 5;//冲刺时能够造成伤害的半径
+
+    protected float currentSkillTime = 0;
+    protected bool isDash = false;
+
     private void Awake()
     {
         
@@ -46,7 +57,7 @@ public class CharacterBase : MonoBehaviour
     {
         CharacterManager.Instance.AddCharacter(this);
         rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
-        collider = this.gameObject.GetComponent<Collider>();
+        collider = this.gameObject.GetComponent<Collider2D>();
         this.hp = this.maxHp;
         this.anim = transform.Find("anim").gameObject;
     }
@@ -95,9 +106,11 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    void useSkill()
+    public void useDash()
     {
-        
+        if (!this.isDash) {
+            StartCoroutine(nameof(DashCoroutine));
+        }
     }
 
     void doDie()
@@ -120,4 +133,27 @@ public class CharacterBase : MonoBehaviour
         isHitBack = false;
     }
 
+    IEnumerator DashCoroutine() {
+        isDash = true;
+        currentSkillTime = 0;
+
+        while (currentSkillTime < skillTime) {
+            if (this.isMoving) {
+                this.rigidbody.velocity = moveVec * dashSpeed * Time.deltaTime;
+            }
+            else {
+                this.rigidbody.velocity = lastMoveVec * dashSpeed * Time.deltaTime;
+            }
+
+            foreach (var character in CharacterManager.Instance.characterList) {
+                if (character != this) {
+                    float distance = Vector3.Distance(transform.position, character.transform.position);
+                    if (distance <= dashDamageRadius) {
+                        character.onHit(this);
+                    }
+                }
+            }
+            yield return null;
+        }
+    }
 }
