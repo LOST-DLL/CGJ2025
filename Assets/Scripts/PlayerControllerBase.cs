@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
@@ -18,21 +19,23 @@ public class PlayerControllerBase : MonoBehaviour
 
     public bool isFlipped => inputX < 0;
 
-    public bool isMoving = true;
+    public bool enablePlayerInput = false;
 
     private CharacterBase selectedCharacter = null;
 
     protected void Start()
     {
-        
         this.loadCharacter("Character");
     }
     
     protected void Update()
     {
-        inputX = Input.GetAxisRaw(horizontalAxis);
-        inputY = Input.GetAxisRaw(verticalAxis);
-        if (this.isMoving&&this.selectedCharacter)
+        if (this.enablePlayerInput)
+        {
+            inputX = Input.GetAxisRaw(horizontalAxis);
+            inputY = Input.GetAxisRaw(verticalAxis);
+        }
+        if (this.selectedCharacter)
         {
             this.selectedCharacter.doMove(inputX, inputY);
         }
@@ -56,6 +59,7 @@ public class PlayerControllerBase : MonoBehaviour
 
     void setSelectedCharacter(CharacterBase character)
     {
+        this.enablePlayerInput = true;
         this.selectedCharacter = character;
         this.selectedCharacter.Init();
     }
