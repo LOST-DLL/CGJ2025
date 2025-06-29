@@ -27,11 +27,12 @@ public class HealthSystem : MonoBehaviour
 
     public bool GodMode;  // 是否开启上帝模式，开启时会自动满血满法力
     public GameObject KO;
-
+    public GameObject KO_O;
+    public GameObject KO_K;
     public int round = 1;
     public event Action PlayerDieEvent;
-    public event Action ResetLevelEvent;
 
+    public event Action ResetLevelEvent;
     //==============================================================
     // Awake 方法：脚本初始化
     //==============================================================
@@ -228,6 +229,7 @@ public class HealthSystem : MonoBehaviour
         }
 
         StartCoroutine(ResetLevel(5f));
+        // KO.SetActive(false);
     }
 
     IEnumerator BackToMenu(float delay) {
@@ -244,6 +246,8 @@ public class HealthSystem : MonoBehaviour
     IEnumerator ResetLevel(float delay) {
         yield return new WaitForSeconds(delay);
         ResetLevelEvent.Invoke();
-
+        KO.SetActive(false);  // 隐藏KO界面
+        KO_O.SetActive(false);  // 隐藏KO_O界面
+        KO_K.SetActive(false);  // 隐藏KO_K界面
     }
 }

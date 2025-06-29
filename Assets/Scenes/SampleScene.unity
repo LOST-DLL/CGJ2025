@@ -1387,6 +1387,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1685120131}
     - target: {fileID: 7794881765234026120, guid: eda7c67a33338f84f88dbd9ac7fccee2, type: 3}
+      propertyPath: KO_K
+      value: 
+      objectReference: {fileID: 648920254}
+    - target: {fileID: 7794881765234026120, guid: eda7c67a33338f84f88dbd9ac7fccee2, type: 3}
+      propertyPath: KO_O
+      value: 
+      objectReference: {fileID: 945944912}
+    - target: {fileID: 7794881765234026120, guid: eda7c67a33338f84f88dbd9ac7fccee2, type: 3}
       propertyPath: hitPoint
       value: 100
       objectReference: {fileID: 0}
