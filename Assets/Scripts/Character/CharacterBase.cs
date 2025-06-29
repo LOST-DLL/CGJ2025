@@ -38,11 +38,13 @@ public class CharacterBase : MonoBehaviour {
     private GameObject anim = null;
 
     private float stopX;
+    private Vector2 lastMoveDirection = Vector2.right;
 
     private bool isDying = false;
     private float dieFallSpeed = 20;
 
     private float originFaceDir;
+
     private void FixedUpdate() {
         if (dashTimer > 0) dashTimer -= Time.fixedDeltaTime;
 
@@ -72,6 +74,13 @@ public class CharacterBase : MonoBehaviour {
             pos.z += dieFallSpeed * Time.deltaTime;
             transform.position = pos;
         }
+
+        Vector2 position = transform.position;
+        float X = position.x;
+        float Y = position.y;
+        if (X < -9f || X > 9f || Y < -3f || Y > 10f) {
+            Die();
+        }
     }
 
     public void Init(float originFaceDir) {
@@ -83,7 +92,6 @@ public class CharacterBase : MonoBehaviour {
         this.curHp = this.maxHp;
         this.anim = transform.Find("anim").gameObject;
 
-        // 注册事件
         TakeDamageEvent += OnTakeDamage;
         if (originFaceDir > 0) {
             TakeDamageEvent += HealthSystem.Instance.TakeDamage;
@@ -101,6 +109,7 @@ public class CharacterBase : MonoBehaviour {
         rigidbody.velocity = input * moveSpeed;
 
         if (input != Vector2.zero) {
+            lastMoveDirection = input;
             animator.SetBool("isMoving", true);
             if (inputX != 0) stopX = inputX;
             animator.SetFloat("X", stopX);
@@ -112,7 +121,8 @@ public class CharacterBase : MonoBehaviour {
 
     public void Dash() {
         if (!this.isDash && dashTimer <= 0 && !this.isBack) {
-            dashDirection = new Vector2(stopX, 0).normalized;
+            dashDirection = lastMoveDirection.normalized;
+            if (dashDirection == Vector2.zero) dashDirection = new Vector2(stopX, 0).normalized;
             if (dashDirection == Vector2.zero) dashDirection = Vector2.right;
 
             dashTimer = dashCD;
@@ -127,7 +137,6 @@ public class CharacterBase : MonoBehaviour {
             if (otherObject.CompareTag("Player")) {
                 var otherCharacter = otherObject.GetComponent<CharacterBase>();
                 if (otherCharacter != null) {
-                    // 分别调用两个事件
                     otherCharacter.TakeDamageEvent?.Invoke(dashDamage);
                     otherCharacter.KnockbackEvent?.Invoke(dashDirection);
 
@@ -145,17 +154,14 @@ public class CharacterBase : MonoBehaviour {
         }
         print($"{gameObject.name} curHp = {curHp}");
 
-        // 打断 Dash
         isDash = false;
         outDashTimer = 0;
     }
 
     private void OnKnockback(Vector2 direction) {
-        // 打断 Dash
         isDash = false;
         outDashTimer = 0;
 
-        // 设置击退
         backDirection = direction.normalized;
         backTimer = backTime;
         isBack = true;

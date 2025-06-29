@@ -100,7 +100,7 @@ public class HealthSystem : MonoBehaviour
 
         UpdateGraphics();  // 更新图形界面
 
-        StartCoroutine(PlayerHurts());  // 播放伤害效果
+        //StartCoroutine(PlayerHurts());  // 播放伤害效果
     }
 
     //==============================================================
