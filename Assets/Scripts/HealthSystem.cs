@@ -33,6 +33,10 @@ public class HealthSystem : MonoBehaviour
     public event Action PlayerDieEvent;
 
     public event Action ResetLevelEvent;
+    
+    [SerializeField] private AudioData round1SFX = null;
+    [SerializeField] private AudioData round2SFX = null;
+    [SerializeField] private AudioData round3SFX = null;
     //==============================================================
     // Awake 方法：脚本初始化
     //==============================================================
@@ -46,6 +50,8 @@ public class HealthSystem : MonoBehaviour
     //==============================================================
     void Start()
     {
+        AudioManager.Instance.PlaySFX(round1SFX);
+        
         UpdateGraphics();  // 初始化图形界面
         timeleft = regenUpdateInterval;  // 设置恢复时间间隔
     }
@@ -222,6 +228,7 @@ public class HealthSystem : MonoBehaviour
         PlayerDieEvent.Invoke();
         EnableKO();
         round += 1;
+        
         print($"Cur Round = {round}");
         if (round > 3) {
             StartCoroutine(BackToMenu(5f));
@@ -229,6 +236,7 @@ public class HealthSystem : MonoBehaviour
         }
 
         StartCoroutine(ResetLevel(5f));
+        
         // KO.SetActive(false);
     }
 
@@ -245,6 +253,14 @@ public class HealthSystem : MonoBehaviour
 
     IEnumerator ResetLevel(float delay) {
         yield return new WaitForSeconds(delay);
+        if (round == 2)
+        {
+            AudioManager.Instance.PlaySFX(round2SFX);  // 播放下一轮的音效
+        }
+        else if (round == 3)
+        {
+            AudioManager.Instance.PlaySFX(round3SFX);  // 播放下一轮的音效
+        }
         ResetLevelEvent.Invoke();
         KO.SetActive(false);  // 隐藏KO界面
         KO_O.SetActive(false);  // 隐藏KO_O界面
