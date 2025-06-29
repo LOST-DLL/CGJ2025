@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class CharacterBase : MonoBehaviour {
     [Header("Movement")]
@@ -95,9 +97,13 @@ public class CharacterBase : MonoBehaviour {
         TakeDamageEvent += OnTakeDamage;
         if (originFaceDir > 0) {
             TakeDamageEvent += HealthSystem.Instance.TakeDamage;
+            HealthSystem.Instance.hitPoint = curHp;
+            HealthSystem.Instance.maxHitPoint = maxHp;
         }
         else {
             TakeDamageEvent += HealthSystem.Instance.UseMana;
+            HealthSystem.Instance.manaPoint = curHp;
+            HealthSystem.Instance.maxManaPoint = maxHp;
         }
         KnockbackEvent += OnKnockback;
     }
@@ -169,6 +175,8 @@ public class CharacterBase : MonoBehaviour {
 
     public void Die() {
         isDying = true;
+        HealthSystem.Instance.EnableKO();
+        StartCoroutine(SwitchSceneAfterDelay(5f));
 
         if (collider != null) collider.enabled = false;
         if (rigidbody != null) rigidbody.simulated = false;
@@ -183,5 +191,16 @@ public class CharacterBase : MonoBehaviour {
         else {
             TakeDamageEvent -= HealthSystem.Instance.UseMana;
         }
+    }
+
+    IEnumerator SwitchSceneAfterDelay(float delay) {
+        // 等待指定的秒数
+        yield return new WaitForSeconds(delay);
+
+        // 使用场景名称切换场景
+        SceneManager.LoadScene("Assets/Scenes/Start.unity");
+
+        // 或者使用场景索引切换场景
+        // SceneManager.LoadScene(sceneIndex);
     }
 }

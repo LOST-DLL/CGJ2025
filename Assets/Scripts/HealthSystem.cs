@@ -23,6 +23,7 @@ public class HealthSystem : MonoBehaviour
     public float regenUpdateInterval = 1f;  // 恢复间隔
 
     public bool GodMode;  // 是否开启上帝模式，开启时会自动满血满法力
+    public GameObject KO;
 
     //==============================================================
     // Awake 方法：脚本初始化
@@ -203,5 +204,9 @@ public class HealthSystem : MonoBehaviour
         PopupText.Instance.Popup("You have died!", 1f, 1f);  // 示例弹窗
 
         yield return null;
+    }
+
+    public void EnableKO() { 
+        KO.SetActive(true);
     }
 }
