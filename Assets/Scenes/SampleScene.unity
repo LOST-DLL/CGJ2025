@@ -454,6 +454,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &980685062 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 119010993739381741, guid: 598a44c3d1d3050438fd6685cf6fa0d9, type: 3}
+  m_PrefabInstance: {fileID: 7182045600834848730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85be587546a0e1d42b2fbe1a29a25752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1105957655
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +758,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2019658728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56cbce00c64e60d4ca117a6f209e0b5d, type: 3}
+  m_Script: {fileID: 11500000, guid: ba8f0901b2e826c46939584a0967b687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1Prefabs:
+  - {fileID: 6452542575004351897, guid: 200d5c2a270d99f419bf6f8ae47f818e, type: 3}
+  - {fileID: 5708365320275337469, guid: 0a509fa1458945042953b830d7d6363b, type: 3}
+  - {fileID: 7942866171421110772, guid: 335c9a76cbc45e0499019071ee3fc384, type: 3}
+  player2Prefabs:
+  - {fileID: 6452542575004351897, guid: 200d5c2a270d99f419bf6f8ae47f818e, type: 3}
+  - {fileID: 5708365320275337469, guid: 0a509fa1458945042953b830d7d6363b, type: 3}
+  - {fileID: 7942866171421110772, guid: 335c9a76cbc45e0499019071ee3fc384, type: 3}
+  player1: {fileID: 980685062}
+  player2: {fileID: 2103012715}
+--- !u!114 &2103012715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2155583396379522174, guid: b495df2efcc9a044fa017d3b83c2d321, type: 3}
+  m_PrefabInstance: {fileID: 1583592068029969337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a076cf8ce7a5214fa5f54b8cb6e7bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1583592068029969337
@@ -1017,7 +1049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 119010993739381741, guid: 598a44c3d1d3050438fd6685cf6fa0d9, type: 3}
       propertyPath: characterName
-      value: Potato
+      value: Fish
       objectReference: {fileID: 0}
     - target: {fileID: 119010993739381741, guid: 598a44c3d1d3050438fd6685cf6fa0d9, type: 3}
       propertyPath: enablePlayerInput
