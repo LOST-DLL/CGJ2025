@@ -18,53 +18,50 @@ public class PlayerControllerBase : MonoBehaviour
 
     public KeyCode dashKey;
 
-    public string characterName;
+    public CharacterBase character;
 
-    public bool enablePlayerInput = false;
+    //public string characterName;
 
-    private CharacterBase selectedCharacter = null;
+    //public bool enablePlayerInput = false;
+
+    //private CharacterBase selectedCharacter = null;
 
     protected void Start()
     {
-        this.LoadCharacter(characterName);
+        //this.LoadCharacter(characterName);
+        character = GetComponent<CharacterBase>();
     }
     
     protected void Update()
     {
-        if (this.enablePlayerInput)
-        {
-            inputX = Input.GetAxisRaw(horizontalAxis);
-            inputY = Input.GetAxisRaw(verticalAxis);
-        }
-        if (this.selectedCharacter)
-        {
-            this.selectedCharacter.Move(inputX, inputY);
-            if (Input.GetKey(dashKey)) {
-                this.selectedCharacter.Dash();
-            }
+        inputX = Input.GetAxisRaw(horizontalAxis);
+        inputY = Input.GetAxisRaw(verticalAxis);
+        this.character.Move(inputX, inputY);
+        if (Input.GetKey(dashKey)) {
+            this.character.Dash();
         }
     }
 
-    void LoadCharacter(string name)
-    {
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/Character/" + name);
+    //void LoadCharacter(string name)
+    //{
+    //    GameObject prefab = Resources.Load<GameObject>("Prefabs/Character/" + name);
 
-        if (prefab != null)
-        {
-            var go = Instantiate(prefab, transform.position, Quaternion.identity);
-            go.transform.SetParent(this.transform);
-            this.SetSelectedCharacter(go.GetComponent<CharacterBase>());
-        }
-        else
-        {
-            Debug.LogError("预制体不存在: " + name);
-        }
-    }
+    //    if (prefab != null)
+    //    {
+    //        var go = Instantiate(prefab, transform.position, Quaternion.identity);
+    //        go.transform.SetParent(this.transform);
+    //        this.SetSelectedCharacter(go.GetComponent<CharacterBase>());
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("预制体不存在: " + name);
+    //    }
+    //}
 
-    void SetSelectedCharacter(CharacterBase character)
-    {
-        this.enablePlayerInput = true;
-        this.selectedCharacter = character;
-        this.selectedCharacter.Init(originFaceDir);
-    }
+    //void SetSelectedCharacter(CharacterBase character)
+    //{
+    //    this.enablePlayerInput = true;
+    //    this.selectedCharacter = character;
+    //    this.selectedCharacter.Init(originFaceDir);
+    //}
 }

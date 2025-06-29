@@ -158,7 +158,7 @@ public class CharacterBase : MonoBehaviour {
         if (curHp <= 0) {
             Die();
         }
-        print($"{gameObject.name} curHp = {curHp}");
+        //print($"{gameObject.name} curHp = {curHp}");
 
         isDash = false;
         outDashTimer = 0;

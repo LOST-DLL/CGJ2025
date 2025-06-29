@@ -8,6 +8,7 @@ public class Player2Controller : PlayerControllerBase
         horizontalAxis = "Player2Horizontal";
         verticalAxis = "Player2Vertical";
         originFaceDir = -1f;
+        dashKey = KeyCode.Keypad2;
     }
     // Start is called before the first frame update
     void Start()

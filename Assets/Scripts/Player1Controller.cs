@@ -9,6 +9,7 @@ public class Player1Controller : PlayerControllerBase
         horizontalAxis = "Player1Horizontal";
         verticalAxis = "Player1Vertical";
         originFaceDir = 1f;
+        dashKey = KeyCode.J;
     }
     void Start()
     {

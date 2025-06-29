@@ -8,8 +8,8 @@ public class SceneChangeTmp : MonoBehaviour
     public GameObject[] player2Prefabs;  // 存储所有玩家2对应的预制件
 
     // 直接引用玩家1和玩家2的控制器
-    public PlayerControllerBase player1;  // 玩家1的控制器
-    public PlayerControllerBase player2;  // 玩家2的控制器
+    public PlayerStart player1Start;  // 玩家1的出生点
+    public PlayerStart player2Start;  // 玩家2的出生点
 
     private int player1Index;
     private int player2Index;
@@ -22,8 +22,8 @@ public class SceneChangeTmp : MonoBehaviour
         player2Index = PlayerPrefs.GetInt("Player2Index", 0);  // 默认值为 0
 
         // 根据索引实例化玩家1和玩家2的预制件
-        InstantiateCharacter(player1Index, player1Prefabs, player1);
-        InstantiateCharacter(player2Index, player2Prefabs, player2);
+        InstantiateCharacter(player1Index, player1Prefabs, player1Start);
+        InstantiateCharacter(player2Index, player2Prefabs, player2Start);
     }
     void Start()
     {
@@ -31,7 +31,7 @@ public class SceneChangeTmp : MonoBehaviour
     }
 
     // 根据索引实例化玩家的预制件
-    void InstantiateCharacter(int index, GameObject[] prefabs, PlayerControllerBase player)
+    void InstantiateCharacter(int index, GameObject[] prefabs, PlayerStart player)
     {
         // 确保索引不越界
         if (index >= 0 && index < prefabs.Length)
