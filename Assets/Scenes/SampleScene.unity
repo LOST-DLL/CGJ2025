@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Potato
-  num: 2
+  playerId: 2
 --- !u!4 &873115981
 Transform:
   m_ObjectHideFlags: 0
@@ -944,7 +944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Potato
-  num: 1
+  playerId: 1
 --- !u!4 &1548453850
 Transform:
   m_ObjectHideFlags: 0

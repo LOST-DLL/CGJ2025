@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerStart : MonoBehaviour
 {
     public string characterName;
-    public int num;
+    public int playerId;
 
     protected void Start() {
         this.LoadCharacter(characterName);
+        HealthSystem.Instance.ResetLevelEvent += ResetCharacter;
     }
     void Update()
     {
@@ -28,14 +29,18 @@ public class PlayerStart : MonoBehaviour
     }
 
     void BindController(GameObject go) {
-        if (num == 1) {
+        if (playerId == 1) {
             go.AddComponent<Player1Controller>();
-            go.GetComponent<CharacterBase>().Init(1f);
+            go.GetComponent<CharacterBase>().Init(playerId);
         }
-        else if (num == 2){
+        else if (playerId == 2){
             go.AddComponent<Player2Controller>();
-            go.GetComponent<CharacterBase>().Init(-1f);
+            go.GetComponent<CharacterBase>().Init(playerId);
         }
         
+    }
+
+    void ResetCharacter() {
+        this.LoadCharacter(characterName);
     }
 }

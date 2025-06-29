@@ -2,11 +2,13 @@ using Character.Manager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class CharacterBase : MonoBehaviour {
+    private int playerId;
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 10;
     [SerializeField] private float attackPower = 10;
@@ -81,30 +83,37 @@ public class CharacterBase : MonoBehaviour {
         float X = position.x;
         float Y = position.y;
         if (X < -9f || X > 9f || Y < -3f || Y > 10f) {
-            Die();
+            if (!isDying) {
+                Die();
+            }
         }
     }
 
-    public void Init(float originFaceDir) {
-        this.stopX = originFaceDir;
-        this.originFaceDir = originFaceDir;
-        animator.SetFloat("X", stopX);
+    public void Init(int playerId) {
+        this.playerId = playerId;
         rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
         collider = this.gameObject.GetComponent<Collider2D>();
         this.curHp = this.maxHp;
         this.anim = transform.Find("anim").gameObject;
 
         TakeDamageEvent += OnTakeDamage;
-        if (originFaceDir > 0) {
+        if (playerId == 1) {
             TakeDamageEvent += HealthSystem.Instance.TakeDamage;
             HealthSystem.Instance.hitPoint = curHp;
             HealthSystem.Instance.maxHitPoint = maxHp;
+            this.originFaceDir = 1f;
         }
         else {
             TakeDamageEvent += HealthSystem.Instance.UseMana;
             HealthSystem.Instance.manaPoint = curHp;
             HealthSystem.Instance.maxManaPoint = maxHp;
+            this.originFaceDir = -1f;
         }
+        this.stopX = originFaceDir;
+        animator.SetFloat("X", stopX);
+
+        HealthSystem.Instance.PlayerDieEvent += DisableController;
+        HealthSystem.Instance.ResetLevelEvent += DestroySelf;
         KnockbackEvent += OnKnockback;
     }
 
@@ -175,11 +184,23 @@ public class CharacterBase : MonoBehaviour {
 
     public void Die() {
         isDying = true;
-        HealthSystem.Instance.EnableKO();
-        StartCoroutine(SwitchSceneAfterDelay(5f));
+        HealthSystem.Instance.LevelEnd();
 
         if (collider != null) collider.enabled = false;
         if (rigidbody != null) rigidbody.simulated = false;
+    }
+
+    private void DestroySelf() {
+        Destroy(gameObject);
+    }
+
+    private void DisableController() {
+        if (playerId == 1) {
+            GetComponent<Player1Controller>().enabled = false;
+        }
+        else {
+            GetComponent<Player2Controller>().enabled = false;
+        }
     }
 
     private void OnDestroy() {
@@ -191,16 +212,9 @@ public class CharacterBase : MonoBehaviour {
         else {
             TakeDamageEvent -= HealthSystem.Instance.UseMana;
         }
+        HealthSystem.Instance.PlayerDieEvent -= DisableController;
+        HealthSystem.Instance.ResetLevelEvent -= DestroySelf;
+
     }
 
-    IEnumerator SwitchSceneAfterDelay(float delay) {
-        // 等待指定的秒数
-        yield return new WaitForSeconds(delay);
-
-        // 使用场景名称切换场景
-        SceneManager.LoadScene("Assets/Scenes/Start.unity");
-
-        // 或者使用场景索引切换场景
-        // SceneManager.LoadScene(sceneIndex);
-    }
 }

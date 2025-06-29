@@ -1,6 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -24,6 +27,10 @@ public class HealthSystem : MonoBehaviour
 
     public bool GodMode;  // 是否开启上帝模式，开启时会自动满血满法力
     public GameObject KO;
+
+    public int round = 1;
+    public event Action PlayerDieEvent;
+    public event Action ResetLevelEvent;
 
     //==============================================================
     // Awake 方法：脚本初始化
@@ -208,5 +215,35 @@ public class HealthSystem : MonoBehaviour
 
     public void EnableKO() { 
         KO.SetActive(true);
+    }
+
+    public void LevelEnd() {
+        PlayerDieEvent.Invoke();
+        EnableKO();
+        round += 1;
+        print($"Cur Round = {round}");
+        if (round > 3) {
+            StartCoroutine(BackToMenu(5f));
+            return;
+        }
+
+        StartCoroutine(ResetLevel(5f));
+    }
+
+    IEnumerator BackToMenu(float delay) {
+        // 等待指定的秒数
+        yield return new WaitForSeconds(delay);
+
+        // 使用场景名称切换场景
+        SceneManager.LoadScene("Assets/Scenes/UI.unity");
+
+        // 或者使用场景索引切换场景
+        // SceneManager.LoadScene(sceneIndex);
+    }
+
+    IEnumerator ResetLevel(float delay) {
+        yield return new WaitForSeconds(delay);
+        ResetLevelEvent.Invoke();
+
     }
 }
